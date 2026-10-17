@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.runelite.net' }
+}
+
+def runeLiteVersion = 'latest.release'
+
+dependencies {
+    compileOnly "net.runelite:client:${runeLiteVersion}"
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    testImplementation "net.runelite:client:${runeLiteVersion}"
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+
+tasks.withType(JavaExec).configureEach {
+    enableAssertions = true
+}
+
